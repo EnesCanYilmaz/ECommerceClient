@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>E-Commerce Project</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a href="#" class="logo"><strong>E-Commerce</strong> Project</a>
+                </header>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="inner">
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+                        <li><a href="#" routerLink="register" *ngIf="!authService.isAuthenticated">Register</a></li>
+                        <li><a href="#" routerLink="login" *ngIf="!authService.isAuthenticated">Login</a></li>
+                        <li><a href="#" routerLink="login" (click)="signOut()" *ngIf="authService.isAuthenticated">Login</a></li>
+                        <li><a href="#" routerLink="">Home</a></li>
+                        <li><a href="#" routerLink="products">Products</a></li>
+                        <li><a href="#" routerLink="baskets">Basket</a></li>
+                        <li><a href="#" routerLink="/admin" *ngIf="authService.isAuthenticated">Dashboard</a></li>
+                        <li><a href="#" routerLink="admin/products" *ngIf="authService.isAuthenticated">Products</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
+<ngx-spinner name="A1" type="square-jelly-box"></ngx-spinner>
+<ngx-spinner name="A2" type="pacman"></ngx-spinner>
+<ngx-spinner name="A3" type="ball-climbing-dot"></ngx-spinner>

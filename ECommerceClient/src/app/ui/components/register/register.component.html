@@ -1,0 +1,47 @@
+<main class="form-signin w-100 m-auto">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+        <h1 class="h3 mb-3 fw-normal">Please register in</h1>
+        <div class="form-floating">
+            <input type="text" formControlName="fullName" class="form-control" placeholder="Full Name" 
+            [ngClass]="{'is-invalid' : submitted && component['fullName'].errors}">
+            <label for="floatingInput">Full Name</label>
+            <small *ngIf="submitted && component['fullName'].errors?.required">Full name cannot be left blank. </small>
+            <small *ngIf="submitted && component['fullName'].errors?.maxlength">User Name between 6 and 50 characters. </small>
+            <small *ngIf="submitted && component['fullName'].errors?.minlength">User Name between 6 and 50 characters. </small>
+        </div>
+        <div class="form-floating">
+            <input type="text" formControlName="userName" class="form-control" placeholder="User Name" 
+            [ngClass]="{'is-invalid' : submitted && component['userName'].errors}">
+            <label for="floatingInput">User Name</label>
+            <small *ngIf="submitted && component['userName'].errors?.required">User Name cannot be left blank. </small>
+            <small *ngIf="submitted && component['userName'].errors?.maxlength">User Name between 6 and 50 characters. </small>
+            <small *ngIf="submitted && component['userName'].errors?.minlength">User Name between 6 and 50 characters. </small>
+        </div>
+        <div class="form-floating">
+            <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                [ngClass]="{'is-invalid' : submitted && component.email.errors}">
+            <label for="floatingInput">Email</label>
+            <small *ngIf="submitted && component['email'].errors?.email">Write in Email format. </small>
+            <small *ngIf="submitted && component['email'].errors?.required">Email cannot be left blank. </small>
+            <small *ngIf="submitted && component['email'].errors?.maxlength">Email must be no more than 50 characters. </small>
+        </div>
+        <div class="form-floating">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                [ngClass]="{'is-invalid' : submitted && component.password.errors}">
+            <label for="floatingInput">Password</label>
+            <small *ngIf="submitted && component['password'].errors?.required">Password cannot be left blank. </small>
+            <small *ngIf="submitted && component['password'].errors?.minlength">Password between 6 and 50 characters. </small>
+            <small *ngIf="submitted && component['password'].errors?.maxlength">Password between 6 and 50 characters. </small>
+        </div>
+        <div class="form-floating">
+            <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Password Confirm"
+                [ngClass]="{'is-invalid' : submitted && component.passwordConfirm.errors}">
+            <label for="floatingInput">Password Confirm</label>
+            <small *ngIf="submitted && component['passwordConfirm'].errors?.required">Password Confirm cannot be left blank. </small>
+            <small *ngIf="submitted && registerForm.hasError('notSame')">Password Not Same. </small>
+            <small *ngIf="submitted && component['passwordConfirm'].errors?.minlength">Password Confirm between 6 and 50 characters. </small>
+            <small *ngIf="submitted && component['passwordConfirm'].errors?.maxlength">Password Confirm between 6 and 50 characters. </small>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" style="margin-top: 30px;" type="submit">Sign in</button>
+    </form>
+</main>

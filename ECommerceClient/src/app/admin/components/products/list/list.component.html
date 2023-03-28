@@ -1,0 +1,39 @@
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>{{product.price}}</td>
+                        <td> <img style="cursor:pointer" (click)="addProductImages(product.id)"
+                                src="../../../../../assets/photo.png" width="25" height="25" />
+                        </td>
+                        <td>
+                            <img style="cursor:pointer" src="../../../../../assets/edit.png" width="25" height="25">
+                        </td>
+                        <td appDelete [id]="product.id" (callback)="getProducts()" controller="products">
+                        </td>
+                    </tr>
+                    <nav aria-label="Page navigation example" style="margin-left: 375px; margin-top: 50px;">
+                        <ul class="pagination">
+                            <li class="page-item" *ngFor="let pageNo of pageList">
+                                <a class="page-link" [routerLink]="['/admin/products', pageNo]">
+                                    {{pageNo}}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </tbody>
+            </table>
+
+            

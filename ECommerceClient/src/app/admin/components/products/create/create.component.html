@@ -1,0 +1,19 @@
+<section class="get-in-touch">
+    <form class="contact-form row">
+       <div class="form-field col-lg-3">
+          <input #txtName  id="name" class="input-text js-input" type="text" required>
+          <label class="label" for="name">Name</label>
+       </div>
+       <div class="form-field col-lg-3">
+          <input #txtStock id="email" class="input-text js-input" type="number" required>
+          <label class="label" for="email">Stock</label>
+       </div>
+        <div class="form-field col-lg-3 ">
+          <input #txtPrice  id="phone" class="input-text js-input" type="number" required>
+          <label class="label" for="phone">Price</label>
+       </div>
+       <div class="form-field col-lg-3">
+          <input class="submit-btn" type="submit" value="Submit" (click)="create(txtName, txtStock, txtPrice)">
+       </div>
+    </form>
+ </section>
