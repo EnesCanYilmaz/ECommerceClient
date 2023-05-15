@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './ui/components/login/login.component';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { DialogModule } from './dialogs/dialog.module';
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
 import { AdminModule } from './admin/admin.module';
@@ -36,7 +36,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains: ["localhost:7201"]
+        allowedDomains: ["localhost:7202"]
       }
     }),
     SocialLoginModule
@@ -52,10 +52,6 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider("727630467978-5s20a54of1fsgmok6a7dc92etb49t56i.apps.googleusercontent.com")
           },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider("494330506126205")
-          }
         ],
         onError: err => console.log(err)
       } as SocialAuthServiceConfig

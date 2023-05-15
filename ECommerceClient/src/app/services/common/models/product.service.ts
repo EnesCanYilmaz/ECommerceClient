@@ -5,31 +5,36 @@ import { Create_Product } from 'src/app/contracts/products/create_product';
 import { List_Product } from 'src/app/contracts/products/list_product';
 import { List_Product_Image } from 'src/app/contracts/products/list_product_image';
 import { HttpClientService } from '../http-client.service';
+import { AlertifyMessageType, AlertifyPosition, AlertifyService } from '../../admin/alertify.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private httpClientService: HttpClientService) { }
+  constructor(private httpClientService: HttpClientService, private alertifyService: AlertifyService) { }
 
-  create(product: Create_Product, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+  create(product: Create_Product, onSuccess?: () => void, onError?: (errorMessage: string) => void) {
     this.httpClientService.post({
       controller: "products",
       headers: new HttpHeaders().set('Authorization', localStorage.getItem("accessToken"))
-    }, product)
-      .subscribe(result => {
-        successCallBack();
-      }), (errorResponse: HttpErrorResponse) => {
-        const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
-        let message = "";
-        _error.forEach((v, index) => {
-          v.value.forEach((_v, _index) => {
-            message += `${_v}<br>`;
+    }, product).subscribe(
+      {
+        next: (response) => {
+          onSuccess();
+        },
+        error: (err) => {
+          const _error: Array<{ key: string, value: Array<string> }> = err.error;
+          let message = "";
+          _error.forEach((v, index) => {
+            v.value.forEach((_v, _index) => {
+              message += `${_v}<br>`;
+            });
           });
-        });
-        errorCallBack(message);
+          onError(message);
+        }
       }
+    );
   }
 
   async list(page: number = 0, size: number = 5, successCallBack?: () => void,
@@ -51,15 +56,15 @@ export class ProductService {
     await firstValueFrom(deleteObservable);
   }
 
-  async readImages(id: string, successCallBack?: () => void): Promise<List_Product_Image[]> {
+  async readImages(id: string): Promise<List_Product_Image[]> {
     const getObservable: Observable<List_Product_Image[]> = this.httpClientService.get<List_Product_Image[]>({
       action: "getproductimages",
       controller: "products"
     }, id);
-
-    const images: List_Product_Image[] = await firstValueFrom(getObservable);
-    return images;
+    return await firstValueFrom(getObservable);
   }
+
+
   async deleteImage(id: string, imageId: string, successCallBack?: () => void) {
     const deleteObservable = this.httpClientService.delete({
       action: "deleteproductimage",

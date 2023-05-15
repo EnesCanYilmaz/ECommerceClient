@@ -25,6 +25,8 @@ export class ListComponent implements OnInit {
   async ngOnInit() {
     this.getProducts()
   }
+
+  
   getProducts() {
     this.activatedRoute.params.subscribe(async params => {
       this.currentPageNo = parseInt(params["pageNo"] ?? 1)
@@ -35,6 +37,7 @@ export class ListComponent implements OnInit {
           errorMessage => {
 
           });
+          
       this.products = data.products;
       this.totalProductCount = data.totalProductCount;
       this.totalPageCount = Math.ceil(parseFloat(this.totalProductCount.toString()) / parseFloat(this.pageSize.toString()));

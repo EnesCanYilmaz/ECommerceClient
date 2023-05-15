@@ -8,6 +8,7 @@ import { FileUploadOptions } from 'src/app/services/common/file-upload/file-uplo
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { BaseDialog } from '../base/base-dialog';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 declare var $: any
 
@@ -22,13 +23,10 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
     @Inject(MAT_DIALOG_DATA) public data: SelectProductİmageState | string,
     private productService: ProductService,
     private spinner: NgxSpinnerService,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) {
     super(dialogRef);
   }
-
- 
-
 
   @Output() options: Partial<FileUploadOptions> = {
     accept: ".png, .jpg, .jpeg, .gif",
@@ -42,21 +40,24 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
   images: List_Product_Image[];
 
   async ngOnInit(): Promise<void> {
-    this.images = await this.productService.readImages(this.data as string,
-      () => this.spinner.hide(SpinnerType.Pacman))
+    await this.getImages(this.data as string);
   }
-
+  
+  async getImages(id: string): Promise<void> {
+    this.images = await this.productService.readImages(id);
+  }
+  
   async deleteImage(imageId: string, event: any) {
     this.dialogService.openDialog({
       componentType: DeleteDialogComponent,
       data: DeleteState.Yes,
       afterClosed: async () => {
         this.spinner.show(SpinnerType.Pacman)
-        await this.productService.deleteImage(this.data as string, imageId,
-          () => this.spinner.hide(SpinnerType.Pacman));
-
-        var card = $(event.srcElement).parent().parent();
-        card.fadeOut(500);
+        await this.productService.deleteImage(this.data as string, imageId, () => {
+          this.spinner.hide(SpinnerType.Pacman);
+          var card = $(event.srcElement).parents('.product-image-card');
+          card.fadeOut(500, () => card.remove());
+        });
       }
     })
   }

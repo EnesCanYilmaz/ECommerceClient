@@ -18,4 +18,7 @@ export class UserService {
 
     return await firstValueFrom(observable) as Create_User;
   }
+  async getUserName(user : User): Promise<Create_User>{
+    const observable : Observable<List_User>
+  }
 }

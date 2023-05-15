@@ -5,7 +5,6 @@ import { SelectProductImageDialogComponent } from './select-product-image-dialog
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { SafePipe } from '../SafePipe';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 
@@ -16,7 +15,6 @@ import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dial
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
     FileUploadDialogComponent,
-    SafePipe
   ],
   imports: [
     CommonModule,

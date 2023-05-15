@@ -8,5 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+const port = environment.port || '4300';

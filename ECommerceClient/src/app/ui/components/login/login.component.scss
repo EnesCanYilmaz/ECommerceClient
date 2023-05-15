@@ -45,3 +45,16 @@ body {
     border-top-right-radius: 0;
     margin-top: 5px;
 }
+asl-google-signin-button {
+    display: inline-block;
+    margin: 5px;
+    border-radius: 15px;
+    
+  }
+  
+  asl-google-signin-button a {
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 10px;
+  }
