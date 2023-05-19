@@ -16,31 +16,31 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
         case HttpStatusCode.Unauthorized:
           this.toastrService.message("Yetkisiz İşlem", "Yetkiniz bulunmamaktadır", {
             messageType: ToastrMessageType.Error,
-            position: ToastrPosition.BottomFullWidth
+            position: ToastrPosition.BottomRight
           });
           break;
         case HttpStatusCode.InternalServerError:
           this.toastrService.message("Sunucu Hatası", "Server Hatası oluştuğundan hata alıyorsunuz", {
             messageType: ToastrMessageType.Error,
-            position: ToastrPosition.BottomFullWidth
+            position: ToastrPosition.BottomRight
           });
           break;
         case HttpStatusCode.BadRequest:
           this.toastrService.message("Geçersiz istek", "İstek döndürülemedi.", {
             messageType: ToastrMessageType.Error,
-            position: ToastrPosition.BottomFullWidth
+            position: ToastrPosition.BottomRight
           });
           break;
         case HttpStatusCode.NotFound:
           this.toastrService.message("Bulunamadı", "Bulunamadı", {
             messageType: ToastrMessageType.Error,
-            position: ToastrPosition.BottomFullWidth
+            position: ToastrPosition.BottomRight
           });
           break;
         default:
           this.toastrService.message("HATA", "Beklenmeyen bir hata meydana geldi.", {
             messageType: ToastrMessageType.Error,
-            position: ToastrPosition.BottomFullWidth
+            position: ToastrPosition.BottomRight
           });
           break;
       }

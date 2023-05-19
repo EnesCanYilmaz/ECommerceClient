@@ -13,7 +13,7 @@
             <div class="inner">
                 <header id="header">
                     <a href="#" class="logo"><strong>E-Commerce</strong> Project</a>
-                    <a href="#" class="logo"><strong *ngIf="authService.isAuthenticated"></strong></a>> 
+                    <a href="#" class="logo" style="margin-left: 600px;" *ngIf="authService.isAuthenticated"><strong>Hoşgeldiniz</strong> {{fullName}}</a>
                 </header>
                 <router-outlet></router-outlet>
             </div>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/common/auth.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
+import { UserAuthService } from './services/common/models/user-auth.service';
+import { Observable } from 'rxjs';
 declare var $: any
 
 
@@ -11,8 +13,19 @@ declare var $: any
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public authService: AuthService, private toastrService : CustomToastrService, private router: Router) {
+  fullName: string = "";
+  constructor(public authService: AuthService, private toastrService : CustomToastrService, private router: Router,private userAuthService : UserAuthService) {
     authService.identityCheck()
+
+     userAuthService.fullName$.subscribe((fullName) => {
+       this.fullName = fullName || ""; 
+     });
+
+    const storedFullName = localStorage.getItem('fullName');
+    if (storedFullName) {
+      this.fullName = storedFullName;
+    }
+    
   }
   signOut(){
     localStorage.removeItem("accessToken");

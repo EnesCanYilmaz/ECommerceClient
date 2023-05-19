@@ -13,20 +13,21 @@ import { UserService } from 'src/app/services/common/models/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends BaseComponent implements OnInit {
+  fullName: string = "";
 
-  constructor(private userAuthService : UserAuthService , spinner: NgxSpinnerService, private authService: AuthService,
-    private activatedRoute: ActivatedRoute, private router: Router, private socialAuthService: SocialAuthService) {
+  constructor(private userAuthService: UserAuthService, spinner: NgxSpinnerService, private authService: AuthService,
+    private activatedRoute: ActivatedRoute, private router: Router, private socialAuthService: SocialAuthService,) {
     super(spinner);
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
       console.log(user);
       this.showSpinner(SpinnerType.Pacman)
       switch (user.provider) {
         case "GOOGLE":
-          await userAuthService.googleLogin(user, () => {})
+          await userAuthService.googleLogin(user, () => { })
           this.router.navigate(['']).then(() => {
             setTimeout(() => {
               window.location.reload();
-            }, 50); 
+            }, 50);
           });
           break;
       }
@@ -48,7 +49,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.router.navigate(['']).then(() => {
       setTimeout(() => {
         window.location.reload();
-      }, 50); 
+      }, 50);
     })
   }
 }
